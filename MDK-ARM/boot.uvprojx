@@ -578,6 +578,11 @@
               <FileType>1</FileType>
               <FilePath>..\App\can.c</FilePath>
             </File>
+            <File>
+              <FileName>files.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\files.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

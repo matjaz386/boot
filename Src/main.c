@@ -60,12 +60,11 @@ static void MX_CAN2_Init(void);
 static void MX_CRC_Init(void);
 static void MX_IWDG_Init(void);
 /* USER CODE BEGIN PFP */
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void				binFileProg(void);
 /* USER CODE END 0 */
 
 /**
@@ -131,8 +130,10 @@ int main(void)
   while (1)
   {
 		_proc_loop();
-		if(boot_timeout && HAL_GetTick() > boot_timeout)
+		if(boot_timeout && HAL_GetTick() > boot_timeout) {
+			binFileProg();
 			HAL_NVIC_SystemReset();
+		}
 
     /* USER CODE END WHILE */
 

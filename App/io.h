@@ -5,18 +5,25 @@
  extern "C" {
 #endif
 
-#include		<string.h>
-#include		<stdlib.h>
-#include		<stdarg.h>
-#include		<stdio.h>
-typedef enum { false, true } bool;
-#define 	FATFS_SECTOR	FLASH_SECTOR_6
-#define		FATFS_ADDRESS 0x08040000
+#include	<string.h>
+#include	<stdlib.h>
+#include	<stdarg.h>
+#include	<stdio.h>
+
 #define		PAGE_SIZE			0x20000
 #define		PAGE_COUNT		5
 #define		SECTOR_SIZE		512
 #define		CLUSTER_SIZE	8*SECTOR_SIZE
 #define		SECTOR_COUNT	(int)(PAGE_SIZE*PAGE_COUNT/(SECTOR_SIZE + sizeof(uint32_t)))
+	
+#define 	FATFS_SECTOR	FLASH_SECTOR_6
+#define		SIGN_SECTOR		FLASH_SECTOR_1
+
+#define		FATFS_TOP 		0x08040000
+#define		SIGN_TOP			0x08004000
+#define		FLASH_TOP			0x08008000
+	
+typedef enum { false, true } bool;
 //______________________________________________________________________________________
 typedef struct _buffer
 {

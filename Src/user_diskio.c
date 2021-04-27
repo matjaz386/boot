@@ -123,11 +123,11 @@ DRESULT USER_read (
   /* USER CODE BEGIN READ */
 	int i,*p,*q=NULL;
 	
-	for(p=(int *)FATFS_ADDRESS; (int)p < FATFS_ADDRESS + PAGE_SIZE*PAGE_COUNT &&  p[SECTOR_SIZE/4]!=-1; p=&p[SECTOR_SIZE/4+1]) {
+	for(p=(int *)FATFS_TOP; (int)p < FATFS_TOP + PAGE_SIZE*PAGE_COUNT &&  p[SECTOR_SIZE/4]!=-1; p=&p[SECTOR_SIZE/4+1]) {
 		if(p[SECTOR_SIZE/4] == sector)
 			q=p;
 	}
-	if((int)p >= FATFS_ADDRESS + PAGE_SIZE*PAGE_COUNT)
+	if((int)p >= FATFS_TOP + PAGE_SIZE*PAGE_COUNT)
 		return RES_ERROR;
 	if(q)
 		p=q;
@@ -161,8 +161,8 @@ DRESULT USER_write (
 	HAL_StatusTypeDef	FLASH_Program(uint32_t, uint32_t);
 	int i,*p,*q=NULL;
 		
-	for(p=(int *)FATFS_ADDRESS; p[SECTOR_SIZE/4]!=-1; p=&p[SECTOR_SIZE/4+1])
-		if((int)p >= FATFS_ADDRESS + PAGE_SIZE*PAGE_COUNT)
+	for(p=(int *)FATFS_TOP; p[SECTOR_SIZE/4]!=-1; p=&p[SECTOR_SIZE/4+1])
+		if((int)p >= FATFS_TOP + PAGE_SIZE*PAGE_COUNT)
 			return RES_ERROR;
 
 	q=(int *)buff;
