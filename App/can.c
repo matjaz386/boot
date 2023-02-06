@@ -180,16 +180,16 @@ void	*canRx(void *v) {
 
 				case _ID_IAP_DWORD:
 					if(py.word[0]==HAL_OK)
-						py.word[0]=FLASH_Program(flash_address, rx.buf.word[0]);
+						py.word[0]|=FLASH_Program(flash_address, rx.buf.word[0]);
 					flash_address += sizeof(uint32_t);
 					if(py.word[0]==HAL_OK)
-						py.word[0]=FLASH_Program(flash_address, rx.buf.word[1]);
+						py.word[0]|=FLASH_Program(flash_address, rx.buf.word[1]);
 					flash_address += sizeof(uint32_t);
-					Send(_ID_IAP_ACK,&py,sizeof(payload));
 					break;
 
 				case _ID_IAP_PING:
-					Send(_ID_IAP_ACK,&py,sizeof(payload));
+					if(!rx.hdr.DLC)					
+						Send(_ID_IAP_ACK,&py,sizeof(payload));
 					break;
 				
 				default:
